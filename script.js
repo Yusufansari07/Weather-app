@@ -11,7 +11,7 @@ const humidityE1 = documentGetElementById("humidity");
 const windE1 = documentGetElementById("wond");
 
 // Event Listeners
-searchBtn.addEventListener("click",handlesearch);
+searchBtn.addEventListener("click",handleSearch);
 cityInput.addEventListener("keydown",(e) => {
     if(e.key === "Enter")handleSearch();
 });
@@ -48,3 +48,31 @@ async function fetchWeather(city){
         setLoading(false);
        }
     }
+
+// Update UI
+function updateUI(data) {
+  cityNameE1.textContent = data.name;
+  tempE1.textContent = `${Math.round(data.main.temp)}°C`;
+  conditionE1.textContent = data.weather[0].description;
+  humidityE1.textContent = `Humidity: ${data.main.humidity}%`;
+  windE1.textContent = `Wind: ${Math.round(data.wind.speed)} km/h`;
+}
+
+// Loading state
+function setLoading(isLoading) {
+  if (isLoading) {
+    tempE1.textContent = "--";
+    conditionE1.textContent = "Loading...";
+    humidityE1.textContent = "";
+    windE1.textContent = "";
+  }
+}
+
+// Error handler
+function showError(message) {
+  cityNameE1.textContent = "Error";
+  tempE1.textContent = "--";
+  conditionE1.textContent = message;
+  humidityE1.textContent = "";
+  windE1.textContent = "";
+}
