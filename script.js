@@ -24,7 +24,7 @@ function handleSearch() {
         return;
     }
 
-    fetchweather(city);
+    fetchWeather(city);
 }
 
 //Fetch Weather data
